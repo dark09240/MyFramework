@@ -10,6 +10,8 @@
 		B65643FA1D8165CD00A02105 /* MyFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = B65643F91D8165CD00A02105 /* MyFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B65644011D8165CD00A02105 /* MyFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B65643F61D8165CD00A02105 /* MyFramework.framework */; };
 		B65644061D8165CD00A02105 /* MyFrameworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B65644051D8165CD00A02105 /* MyFrameworkTests.m */; };
+		B65644121D81665700A02105 /* DongFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = B65644101D81665700A02105 /* DongFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B65644131D81665700A02105 /* DongFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = B65644111D81665700A02105 /* DongFramework.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		B65644001D8165CD00A02105 /* MyFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65644051D8165CD00A02105 /* MyFrameworkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyFrameworkTests.m; sourceTree = "<group>"; };
 		B65644071D8165CD00A02105 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B65644101D81665700A02105 /* DongFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongFramework.h; sourceTree = "<group>"; };
+		B65644111D81665700A02105 /* DongFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongFramework.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 			children = (
 				B65643F91D8165CD00A02105 /* MyFramework.h */,
 				B65643FB1D8165CD00A02105 /* Info.plist */,
+				B65644101D81665700A02105 /* DongFramework.h */,
+				B65644111D81665700A02105 /* DongFramework.m */,
 			);
 			path = MyFramework;
 			sourceTree = "<group>";
@@ -94,6 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B65643FA1D8165CD00A02105 /* MyFramework.h in Headers */,
+				B65644121D81665700A02105 /* DongFramework.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +115,7 @@
 				B65643F21D8165CD00A02105 /* Frameworks */,
 				B65643F31D8165CD00A02105 /* Headers */,
 				B65643F41D8165CD00A02105 /* Resources */,
+				B65644141D816E7D00A02105 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -188,11 +196,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B65644141D816E7D00A02105 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${ACTION}\" = \"build\" ]\nthen\nINSTALL_DIR=${SRCROOT}/Products/${PROJECT_NAME}.framework\n\nDEVICE_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\n\nSIMULATOR_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework\n\n\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\nmkdir -p \"${INSTALL_DIR}\"\n\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/\"\n#ditto \"${DEVICE_DIR}/Headers\" \"${INSTALL_DIR}/Headers\"\n\nlipo -create \"${DEVICE_DIR}/${PROJECT_NAME}\" \"${SIMULATOR_DIR}/${PROJECT_NAME}\" -output \"${INSTALL_DIR}/${PROJECT_NAME}\"\n\n#open \"${DEVICE_DIR}\"\nopen \"${SRCROOT}/Products\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B65643F11D8165CD00A02105 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65644131D81665700A02105 /* DongFramework.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
