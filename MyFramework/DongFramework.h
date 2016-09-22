@@ -1,38 +1,35 @@
-//
-//  DongFramework.h
-//  MyFramework
-//
-//  Created by Lycodes_Dong on 9/8/16.
-//  Copyright © 2016 Lycodes. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(int,MyItemHeightType) {
-    
     MyStatusBarHeightType = 0,
     MyNavigationBarHeightType,
     MyTabBarHeightType,
     MyAllHeightType
-    
 };
 
 @interface DongFramework : NSObject
 
-NS_ASSUME_NONNULL_BEGIN
-
-+ (void)setConstraintsWithSuperView:(UIView *)superview Format:(NSString *)format Views:(NSDictionary<NSString *, id> *)views;
-// views = NSDictionaryOfVariableBindings(...)
-
-+ (void)getJsonWithURL:(NSString *)urlstring Completion:(void(^)(NSArray * __nullable array, NSError * __nullable error))completion;
-
-+ (void)getImageWithURL:(NSString *)urlstring Completion:(void(^)(UIImage * __nullable image, NSError * __nullable error))completion;
-
+#pragma mark - Get Item Height
 + (CGFloat)getItemHeight:(MyItemHeightType)type ViewController:(UIViewController *)viewcontroller;
 
-+ (UIColor *)customColorWithRed:(CGFloat)red Green:(CGFloat)green Blue:(CGFloat)blue Alpha:(CGFloat)alpha;
+@end
 
-NS_ASSUME_NONNULL_END
+@interface UIView(SetConstraints)
+
+#pragma mark - Set Layout Constraint
+- (void)setConstraintsWithFormat:(NSString *)format Views:(NSDictionary<NSString *,id> *)views;
 
 @end
+
+@interface NSURL(GetJsonOrImage)
+
+#pragma mark - Get Json Or Image
+- (void)urlGetJsonCompletion:(void(^)(NSArray * __nullable array, NSError * __nullable error))completion;
+- (void)urlGetImageCompletion:(void(^)(UIImage * __nullable image, NSError * __nullable error))completion;
+
+@end
+
+NS_ASSUME_NONNULL_END
